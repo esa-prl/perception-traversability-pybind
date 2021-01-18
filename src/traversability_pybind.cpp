@@ -12,13 +12,14 @@ namespace py = pybind11;
 
 PYBIND11_MODULE(traversability_pybind, m) {
     m.doc() = R"pbdoc(
-        Pybind11 example plugin
+        Pybind11 plugin for rock perception-traversability component
         -----------------------
         .. currentmodule:: traversability_pybind
         .. autosummary::
-           :toctree: _generate
-           add
-           subtract
+           __init__
+           configure_traversability
+           set_elevation_map
+           compute_traversability
     )pbdoc";
 
     py::class_<traversability::Traversability>(m, "Traversability")
