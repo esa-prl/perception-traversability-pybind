@@ -6,9 +6,12 @@ find_package(OpenCV REQUIRED)
 find_package(Eigen3 REQUIRED)
 include_directories ( ${EIGEN3_INCLUDE_DIRS} )
 
+add_library(traversability perception-traversability/src/traversability.cpp)
+target_link_libraries(traversability PUBLIC ${OpenCV_LIBS})
+
 find_package(pybind11 REQUIRED)
 pybind11_add_module(traversability_pybind src/traversability_pybind.cpp)
-target_link_libraries(traversability_pybind PUBLIC ${OpenCV_LIBS})
+target_link_libraries(traversability_pybind PUBLIC traversability ${OpenCV_LIBS})
 
 # Alternative implementation for adding traversability_pybind library
 # find_package(pybind11 REQUIRED)
