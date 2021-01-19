@@ -6,9 +6,6 @@
 #define STRINGIFY(x) #x
 #define MACRO_STRINGIFY(x) STRINGIFY(x)
 
-int add(int i, int j) {
-    return i + j;
-}
 
 namespace py = pybind11;
 
@@ -35,16 +32,6 @@ PYBIND11_MODULE(traversability_pybind, m) {
         .def("compute_traversability", &traversability::Traversability::computeTraversability)
         .def("local_2_global_orientation", &traversability::Traversability::local2globalOrientation)
         .def("local_2_global_orientation_legacy", &traversability::Traversability::local2globalOrientation_legacy);
-
-    m.def("add", &add, R"pbdoc(
-        Add two numbers
-        Some other explanation about the add function.
-    )pbdoc");
-
-    m.def("subtract", [](int i, int j) { return i - j; }, R"pbdoc(
-        Subtract two numbers
-        Some other explanation about the subtract function.
-    )pbdoc");
 
 #ifdef VERSION_INFO
     m.attr("__version__") = MACRO_STRINGIFY(VERSION_INFO);
