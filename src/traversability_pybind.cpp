@@ -11,14 +11,14 @@
 namespace py = pybind11;
 
 class TraversabilityPython : public traversability::Traversability {
-    // Eigen::Map<Eigen::Matrix<float, Eigen::Dynamic, Eigen::RowMajor>> big_mat = Eigen::MatrixXd::Zero(10000, 10000);
+    // Eigen::MatrixXf big_mat = Eigen::MatrixXf::Zero(50, 50);
 public:
     /* we need to provide an alternative method as the conversion from CV in C to numpy in Python is quite hard
        while the conversion from eigen to numpy is quite easy */
-    Eigen::Map<Eigen::Matrix<float, Eigen::Dynamic, Eigen::RowMajor>> &computeTraversabilityEigen() {
+    Eigen::MatrixXf &computeTraversabilityEigen() {
         cv::Mat traversability_cv = computeTraversability();
-        // std::cout << "cv rows " << traversability_cv.rows << " columns " << traversability_cv.cols << "/newline";
-        Eigen::Map<Eigen::Matrix<float, Eigen::Dynamic, Eigen::RowMajor>> traversability_eigen(traversability_cv.ptr<float>(), traversability_cv.rows, traversability_cv.cols);
+        Eigen::MatrixXf traversability_eigen;
+        cv2eigen(traversability_cv, traversability_eigen);
         return traversability_eigen;
     }
 };
@@ -45,7 +45,7 @@ PYBIND11_MODULE(traversability_pybind, m) {
         .def("threshold_slope_map", &TraversabilityPython::thresholdSlopeMap)
         .def("dilate_traversability", &TraversabilityPython::dilateTraversability)
         .def("compute_traversability", &TraversabilityPython::computeTraversability)
-        .def("compute_traversability_eigen", &TraversabilityPython::computeTraversabilityEigen, py::return_value_policy::reference_internal)
+        .def("compute_traversability_eigen", &TraversabilityPython::computeTraversabilityEigen)
         .def("local_2_global_orientation", &TraversabilityPython::local2globalOrientation)
         .def("local_2_global_orientation_legacy", &TraversabilityPython::local2globalOrientation_legacy)
         .def("show_traversability", &TraversabilityPython::showTraversability)
