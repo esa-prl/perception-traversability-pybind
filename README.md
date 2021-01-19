@@ -8,7 +8,7 @@ brew install cmake opencv pcl eigen
 ```
 Subsequently, we can install the Python module using pip:
 ```
-pip install -e .
+pip install -e --user .
 ```
 ## Usage instructions
 Below you can find a sample code snippet on how to use this Python module:
