@@ -11,13 +11,12 @@
 namespace py = pybind11;
 
 class TraversabilityPython : public traversability::Traversability {
-    // Eigen::MatrixXf big_mat = Eigen::MatrixXf::Zero(50, 50);
+    Eigen::MatrixXf traversability_eigen;
 public:
     /* we need to provide an alternative method as the conversion from CV in C to numpy in Python is quite hard
-       while the conversion from eigen to numpy is quite easy */
+       while the conversion from eigen to numpy is rather easy */
     Eigen::MatrixXf &computeTraversabilityEigen() {
         cv::Mat traversability_cv = computeTraversability();
-        Eigen::MatrixXf traversability_eigen;
         cv2eigen(traversability_cv, traversability_eigen);
         return traversability_eigen;
     }
