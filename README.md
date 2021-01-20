@@ -55,5 +55,5 @@ traversability.configure_traversability(map_resolution, slope_map_scale,
 dem = np.ones(shape=(100, 100))
 traversability.set_elevation_map(rec_dem.reshape((-1), order='C').tolist(),
                                  rec_dem.shape[0], rec_dem.shape[1])
-traversability_map = np.array(traversability.compute_traversability())
+traversability_map = np.array(traversability.compute_traversability_eigen())
 ```
