@@ -46,6 +46,7 @@ PYBIND11_MODULE(traversability_pybind, m) {
         .def("compute_traversability", &TraversabilityPython::computeTraversability)
         .def("compute_traversability_eigen", &TraversabilityPython::computeTraversabilityEigen,
              py::return_value_policy::reference_internal)
+        .def_readwrite("rotate_local2global", &TraversabilityPython::rotate_local2global)
         .def("local_2_global_orientation", &TraversabilityPython::local2globalOrientation)
         .def("local_2_global_orientation_legacy", &TraversabilityPython::local2globalOrientation_legacy)
         .def("show_traversability", &TraversabilityPython::showTraversability)
