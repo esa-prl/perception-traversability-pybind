@@ -11,14 +11,14 @@
 namespace py = pybind11;
 
 class TraversabilityPython : public traversability::Traversability {
-    Eigen::MatrixXf traversability_eigen;
+    Eigen::MatrixXf traversability_map_eigen;
 public:
     /* we need to provide an alternative method as the conversion from CV in C to numpy in Python is quite hard
        while the conversion from eigen to numpy is rather easy */
-    Eigen::MatrixXf &computeTraversabilityEigen() {
-        cv::Mat traversability_cv = computeTraversability();
-        cv2eigen(traversability_cv, traversability_eigen);
-        return traversability_eigen;
+    Eigen::MatrixXf &getTraversabilityMapEigen() {
+        cv::Mat traversability_cv = getTraversabilityMap();
+        cv2eigen(traversability_cv, traversability_map_eigen);
+        return traversability_map_eigen;
     }
 };
 
@@ -40,7 +40,7 @@ PYBIND11_MODULE(traversability_pybind, m) {
         .def("configure_traversability", &TraversabilityPython::configureTraversability)
         .def("set_elevation_map", &TraversabilityPython::setElevationMap)
         .def("compute_traversability", &TraversabilityPython::computeTraversability)
-        .def("compute_traversability_eigen", &TraversabilityPython::computeTraversabilityEigen,
+        .def("get_traversability_map_eigen", &TraversabilityPython::getTraversabilityMapEigen,
              py::return_value_policy::reference_internal)
         .def_readwrite("rotate_local2global", &TraversabilityPython::rotate_local2global)
         .def("local_2_global_orientation", &TraversabilityPython::local2globalOrientation)
