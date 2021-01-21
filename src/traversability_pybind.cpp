@@ -15,9 +15,11 @@ class TraversabilityPython : public traversability::Traversability {
 public:
     /* we need to provide an alternative method as the conversion from CV in C to numpy in Python is quite hard
        while the conversion from eigen to numpy is rather easy */
-    Eigen::MatrixXf &getTraversabilityMapEigen() {
-        cv::Mat traversability_cv = getTraversabilityMap();
-        cv2eigen(traversability_cv, traversability_map_eigen);
+    void setElevationMapEigen(Eigen::MatrixXf elevation_map_eigen) {
+        eigen2cv(elevation_map_eigen, elevation_map);
+    }
+    Eigen::MatrixXf getTraversabilityMapEigen() {
+        cv2eigen(traversability_map, traversability_map_eigen);
         return traversability_map_eigen;
     }
 };
@@ -31,14 +33,16 @@ PYBIND11_MODULE(traversability_pybind, m) {
         .. autosummary::
            __init__
            configure_traversability
-           set_elevation_map
+           set_elevation_map_eigen
            compute_traversability
+           get_traversability_map_eigen
     )pbdoc";
 
     py::class_<TraversabilityPython>(m, "Traversability")
         .def(py::init<>())
         .def("configure_traversability", &TraversabilityPython::configureTraversability)
-        .def("set_elevation_map", &TraversabilityPython::setElevationMap)
+        .def("set_elevation_map_std_vector", &TraversabilityPython::setElevationMapStdVector)
+        .def("set_elevation_map_eigen", &TraversabilityPython::setElevationMapEigen)
         .def("compute_traversability", &TraversabilityPython::computeTraversability)
         .def("get_traversability_map_eigen", &TraversabilityPython::getTraversabilityMapEigen,
              py::return_value_policy::reference_internal)
