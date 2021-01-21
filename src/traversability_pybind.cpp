@@ -39,10 +39,6 @@ PYBIND11_MODULE(traversability_pybind, m) {
         .def(py::init<>())
         .def("configure_traversability", &TraversabilityPython::configureTraversability)
         .def("set_elevation_map", &TraversabilityPython::setElevationMap)
-        .def("elevation_map_interpolate", &TraversabilityPython::elevationMapInterpolate)
-        .def("elevation_map_2_slope_map", &TraversabilityPython::elevationMap2SlopeMap)
-        .def("threshold_slope_map", &TraversabilityPython::thresholdSlopeMap)
-        .def("dilate_traversability", &TraversabilityPython::dilateTraversability)
         .def("compute_traversability", &TraversabilityPython::computeTraversability)
         .def("compute_traversability_eigen", &TraversabilityPython::computeTraversabilityEigen,
              py::return_value_policy::reference_internal)
