@@ -1,0 +1,10 @@
+<package>
+  <description brief="Conversion from input elevation grid map to outputs traversability grid">
+  
+  </description>
+  <author>Maximilian Stölzle/maximilian.stoelzle@esa.int</author>
+  <license></license>
+  <url>https://github.com/esa-prl/perception-traversability-pybind</url>
+  <logo>http://</logo>
+  <depend package="perception/traversability" />
+</package>
