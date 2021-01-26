@@ -25,6 +25,6 @@ target_link_libraries(traversability_pybind PUBLIC traversability ${OpenCV_LIBS}
 # pybind11_extension(traversability_pybind)
 # pybind11_strip(traversability_pybind)
 
-# EXAMPLE_VERSION_INFO is defined by setup.py and passed into the C++ code as a
+# TRAVERSABILITY_PYBIND_VERSION_INFO is defined by setup.py and passed into the C++ code as a
 # define (VERSION_INFO) here.
 target_compile_definitions(traversability_pybind PRIVATE VERSION_INFO=${TRAVERSABILITY_PYBIND_VERSION_INFO})
