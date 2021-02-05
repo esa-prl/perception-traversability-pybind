@@ -12,7 +12,7 @@ pip install -e --user .
 ```
 ## Usage instructions
 Below you can find a sample code snippet on how to use this Python module:
-```
+```python
 from traversability_pybind import Traversability
 traversability = Traversability()
 
