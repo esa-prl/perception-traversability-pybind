@@ -4,7 +4,7 @@ This repository provides Python bindings for the rock [perception-traversability
 Please install the following packages to use this repo:
 On macOS this can be done with:
 ```
-brew install cmake opencv pcl eigen
+brew install pybind11 cmake opencv pcl eigen
 ```
 Subsequently, we can install the Python module using pip:
 ```
